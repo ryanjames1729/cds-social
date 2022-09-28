@@ -33,7 +33,7 @@ export default function SignIn({ providers, csrfToken }) {
           <div className="flex flex-col px-16 lg:w-full px-2 lg:px-96 mt-20">
             <div className="flex flex-col items-center border-2 border-solid rounded-lg border-stone-800 dark:border-white rounded-lg p-4">
               <div className="text-center">
-                Woops! You're not signed in.<br/>Sign in below to post comments.
+                Woops! You&apos;re not signed in.<br/>Sign in below to post comments.
               </div>
               <div className="mt-4 p-2">
                 {Object.values(providers).map((provider) => (

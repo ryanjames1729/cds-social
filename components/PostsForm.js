@@ -57,7 +57,7 @@ const PostsForm = ({ session }) => {
 
     return (
         <div className="p-4 rounded-lg shadow-lg border-black">
-            <h1 className="text-3xl">{session ? session.user.email.split("@")[0] : "anonymous"}, What's Your Thoughts?</h1>
+            <h1 className="text-3xl">{session ? session.user.email.split("@")[0] : "anonymous"}, What&apos;s Your Thoughts?</h1>
             <div className="grid grid-cols-1 gap-4 mb-4">
                 <textarea ref={commentEl} className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-slate-300 dark:bg-gray-200 dark:text-black" 
                     placeholder="Comment"
