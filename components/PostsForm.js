@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { submitComment } from '../services'
-
+import { useRouter } from 'next/router'
 
 
 
@@ -13,6 +13,7 @@ const PostsForm = ({ session }) => {
     const nameEl = useRef();
     const emailEl = useRef();
     const storeDataEl = useRef();
+    const router = useRouter()
     
 
     const handleSubmit = () => {
@@ -25,8 +26,6 @@ const PostsForm = ({ session }) => {
             
             userName = session.user.email.split("@")[0];
         } 
-
-
         if(!commentBody || !userName) {
             setError(true);
             return;
@@ -42,13 +41,11 @@ const PostsForm = ({ session }) => {
             });
         }
     
-        
         const commentObject = { body, date, location, userName }
-
         submitComment(commentObject)
             .then((res) => {
                 setShowSuccessMessage(true);
-                
+                router.replace(router.asPath)
                 setTimeout(() => {
                     setShowSuccessMessage(false);
                 }, 3000);

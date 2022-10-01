@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react"
 import PostsForm from "../components/PostsForm"
 import Header from "../components/header"
 
+
 import { gql, GraphQLClient } from 'graphql-request';
 
 
@@ -24,7 +25,8 @@ export const getStaticProps = async (context) => {
     return {
         props: {
             posts: data.posts
-        }
+        },
+        revalidate: 60,
     }
 }
 
@@ -35,6 +37,7 @@ export const getStaticProps = async (context) => {
 export default function MyPosts ({ posts }) {
     const { data: session } = useSession()
     const loggedInUser = session?.user?.email.split("@")[0] || null
+    
 
     return (
         <>
