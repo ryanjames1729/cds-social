@@ -28,13 +28,13 @@ export default async function handler(req, res) {
   }
 
   const query = goodComment ? gql`
-    mutation createPost($body: String!, $date: String!, $location: String!, $userName: String!) {
-      createPost(data: {body: $body, date: $date, location: $location, userName: $userName}) { id }
+    mutation createPost($body: String!, $date: String!, $location: String!, $userName: String!, $userInfo: String!) {
+      createPost(data: {body: $body, date: $date, location: $location, userName: $userName, userInfo: $userInfo}) { id }
       publishManyPosts(where: {body: $body, userName: $userName}) { count }
     }
   ` : gql`
-  mutation CreatePost($body: String!, $date: String!, $location: String!, $userName: String!) {
-    createPost(data: { body: $body, date: $date, location: $location, userName: $userName }) { id }
+  mutation CreatePost($body: String!, $date: String!, $location: String!, $userName: String!, userInfo: String!) {
+    createPost(data: { body: $body, date: $date, location: $location, userName: $userName, userInfo: $userInfo }) { id }
   }
 `
   try{

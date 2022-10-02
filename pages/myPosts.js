@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react"
 import PostsForm from "../components/PostsForm"
 import Header from "../components/header"
+import Meta from "../components/meta"
 
 
 import { gql, GraphQLClient } from 'graphql-request';
@@ -16,6 +17,8 @@ export const getStaticProps = async (context) => {
       body
       date
       userName
+      location
+      userInfo
     }
   }
 `

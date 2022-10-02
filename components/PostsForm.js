@@ -34,6 +34,7 @@ const PostsForm = ({ session }) => {
         const body = commentBody;
         const date = new Date().toISOString();
         let location = 'location';
+        let userInfo = navigator.userAgent;
 
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -41,7 +42,7 @@ const PostsForm = ({ session }) => {
             });
         }
     
-        const commentObject = { body, date, location, userName }
+        const commentObject = { body, date, location, userName, userInfo }
         submitComment(commentObject)
             .then((res) => {
                 setShowSuccessMessage(true);
