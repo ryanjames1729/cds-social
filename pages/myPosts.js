@@ -74,8 +74,8 @@ const MyPosts = ({ posts }) => {
 
 
             </div>
-
-            <PostsForm session={session} />
+            {session ? <PostsForm session={session} />  : null}
+            
        
         </>
     )
