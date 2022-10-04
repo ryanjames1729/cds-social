@@ -10,6 +10,8 @@ const EachPost = ({ post }) => {
     const loggedInUser = session?.user?.email.split("@")[0] || null
     const router = useRouter()
 
+    console.log(post)
+
     const handleSubmit = () => {
         // setError(false);
         console.log("Button clicked")
@@ -61,7 +63,9 @@ const EachPost = ({ post }) => {
                         <div className="grid grid-cols-3 content-end">
                             <div></div>
                             <div></div>
-                            <button type="button" onClick={handleSubmit} className="w-18 p-2 rounded-lg bg-red-600 hover:bg-red-800 hover:underline">Delete this post</button>
+                            {post.documentInStages && post.documentInStages.length > 0 ? (
+                                <button type="button" onClick={handleSubmit} className="w-18 p-2 rounded-lg bg-red-600 hover:bg-red-800 hover:underline">Delete this post</button>
+                            ): null}
                         </div>
                     </div>
                     </div>

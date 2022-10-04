@@ -33,7 +33,7 @@ const PostsForm = ({ session }) => {
 
         const body = commentBody;
         const date = new Date().toISOString();
-        let location = 'location';
+        let location = 'unknown';
         let userInfo = navigator.userAgent;
 
         if ('geolocation' in navigator) {
