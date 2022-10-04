@@ -2,56 +2,42 @@ import { useSession } from "next-auth/react"
 import PostsForm from "../components/PostsForm"
 import Header from "../components/header"
 import Meta from "../components/meta"
-import { gql, GraphQLClient } from 'graphql-request';
 import { useRouter } from 'next/router'
+import { deleteComment } from '../services'
 
-export const getStaticProps = async (context) => {    
-
-    const query = gql`
-    query MyQuery {
-    posts (orderBy: updatedAt_DESC) {
-      id
-      body
-      date
-      userName
-    }
-  }
-`
-    const graphQLClient = new GraphQLClient(process.env.HYGRAPH_ENDPOINT)
-    const data = await graphQLClient.request(query)
-
-    return {
-        props: {
-            posts: data.posts
-        },
-        revalidate: 60,
-    }
-}
-
-export default function Feed ({ posts }) {
+const EachPost = ({ post }) => {
     const { data: session } = useSession()
+    const loggedInUser = session?.user?.email.split("@")[0] || null
     const router = useRouter()
+
+    const handleSubmit = () => {
+        // setError(false);
+        console.log("Button clicked")
     
-    const refreshData = () => { 
-        router.replace(router.asPath)
+        
+        const userName = post.userName;
+    
+    
+        const body = post.body;
+        const date = post.date ? post.date : new Date().toISOString();
+        let location = post.location ? post.location : "Unknown";
+        let userInfo = post.userInfo ? post.userInfo : "Unknown";
+    
+        const commentObject = { body, userName }
+
+        console.log(commentObject)
+        deleteComment(commentObject)
+            .then((res) => {
+                // setShowSuccessMessage(true);
+                router.replace(router.asPath)
+                setTimeout(() => {
+                    // setShowSuccessMessage(false);
+                }, 3000);
+        })
     }
 
     return (
-        <>
-            <Meta />    
-            <Header />
-            {/* center button */}
-            
-            <div className="fixed bottom-0 right-0 mr-6 mb-6">
-                <button className="ml-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 bg-transparent transition duration-150 ease-in-out hover:border-indigo-600 lg:text-xl lg:font-bold  hover:text-indigo-600 rounded border border-indigo-700 text-indigo-700 px-4 sm:px-10 py-2 sm:py-4 text-sm" onClick={refreshData}>Refresh</button>
-            </div>
-
-            <div className="container px-2">
-
-                <div className="flex flex-col items-center justify-center">
-                {posts.map(post => (
-                
-                <div key={post.id} className="max-w-sm w-full lg:w-screen lg:flex py-6">
+        <div key={post.id} className="max-w-sm w-full lg:w-screen lg:flex py-6">
                 <div className="pt-10 border-l border-gray-400 border-t border-b h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden">
                     <h2 className="text-8xl">{post.userName.substring(0,2).toUpperCase()}</h2>
                 </div>
@@ -70,18 +56,19 @@ export default function Feed ({ posts }) {
                     <div className="text-sm">
                         <p className="text-gray-900 leading-none">{post.userName}</p>
                         <p className="text-gray-600">{post.date.split("T")[0]}</p>
+                        <p className="text-gray-600">Location: {post.location}</p>
+                        <p className="text-gray-600">Info: {post.userInfo}</p>
+                        <div className="grid grid-cols-3 content-end">
+                            <div></div>
+                            <div></div>
+                            <button type="button" onClick={handleSubmit} className="w-18 p-2 rounded-lg bg-red-600 hover:bg-red-800 hover:underline">Delete this post</button>
+                        </div>
                     </div>
                     </div>
                 </div>
+                    
                 </div>    
-                ))} 
-                </div>
-
-
-            </div>
-
-           
-       
-        </>
     )
 }
+
+export default EachPost
