@@ -68,6 +68,7 @@ const Header = () => {
                     </a>
                 </Link>
                 </li>
+                { session ? (
                 <li className="nav-item">
                 <Link href="/myPosts">
                     <a 
@@ -78,6 +79,7 @@ const Header = () => {
                     </a>
                 </Link>
                 </li>
+                ) : null}
                 <li className="nav-item mb-2 lg:mb-0">
                 <Link href="/feed">
                     <a 

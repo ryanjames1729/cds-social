@@ -60,7 +60,7 @@ const MyPosts = ({ posts }) => {
             <Meta />
             <Header />
             
-
+            {session ? <PostsForm session={session} />  : null}
 
             <div className="container px-2">
 
@@ -74,7 +74,7 @@ const MyPosts = ({ posts }) => {
 
 
             </div>
-            {session ? <PostsForm session={session} />  : null}
+            
             
        
         </>

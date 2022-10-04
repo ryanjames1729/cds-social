@@ -51,7 +51,7 @@ export default function Feed ({ posts }) {
                 <div className="flex flex-col items-center justify-center">
                 {posts.map(post => (
                 
-                <div key={post.id} className="max-w-sm w-full lg:w-screen lg:flex py-6">
+                <div key={post.id} className="w-1/2 lg:flex py-6">
                 <div className="pt-10 border-l border-gray-400 border-t border-b h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden">
                     <h2 className="text-8xl">{post.userName.substring(0,2).toUpperCase()}</h2>
                 </div>
