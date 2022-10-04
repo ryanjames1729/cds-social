@@ -48,31 +48,8 @@ const MyPosts = ({ posts }) => {
     const { data: session } = useSession()
     const loggedInUser = session?.user?.email.split("@")[0] || null
 
-    const handleSubmit = (post) => {
-        // setError(false);
-        console.log("Button clicked")
-    
-        const router = useRouter()
-        const userName = post.userName;
     
     
-        const body = post.body;
-        const date = post.date ? post.date : new Date().toISOString();
-        let location = post.location ? post.location : "Unknown";
-        let userInfo = post.userInfo ? post.userInfo : "Unknown";
-    
-        const commentObject = { body, userName }
-
-        console.log(commentObject)
-        // deleteComment(commentObject)
-        //     .then((res) => {
-        //         // setShowSuccessMessage(true);
-        //         router.replace(router.asPath)
-        //         setTimeout(() => {
-        //             // setShowSuccessMessage(false);
-        //         }, 3000);
-        // })
-    }
     
 
     return (
