@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     }
   ` 
   try{
-    console.log(req.body)
+    
     
     const result = await graphQLClient.request(query, req.body)
 
