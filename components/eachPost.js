@@ -18,6 +18,8 @@ const EachPost = ({ post }) => {
     
         
         const userName = post.userName;
+
+        
     
     
         const body = post.body;
