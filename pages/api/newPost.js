@@ -4,7 +4,7 @@
 // will be treated as an endpoint and not a page
 
 import { GraphQLClient, gql } from "graphql-request"
-import { ProfanityEngine } from '@coffeeandfun/google-profanity-words'
+// import { ProfanityEngine } from '@coffeeandfun/google-profanity-words'
 
 const graphqlAPI = process.env.HYGRAPH_ENDPOINT
 const graphcmsToken = process.env.HYGRAPH_TOKEN
@@ -19,13 +19,13 @@ export default async function handler(req, res) {
   })
 
   let comment = req.body.body.split(" ")
-  let profanity = new ProfanityEngine()
+  // let profanity = new ProfanityEngine()
   let goodComment = true
-  for(let i = 0; i < comment.length; i++){
-    if(profanity.search(comment[i])){
-      goodComment = false
-    }
-  }
+  // for(let i = 0; i < comment.length; i++){
+  //   if(profanity.search(comment[i])){
+  //     goodComment = false
+  //   }
+  // }
 
   const query = goodComment ? gql`
     mutation createPost($body: String!, $date: String!, $location: String!, $userName: String!, $userInfo: String!) {
