@@ -5,6 +5,7 @@
 
 import { GraphQLClient, gql } from "graphql-request"
 // import { ProfanityEngine } from '@coffeeandfun/google-profanity-words'
+import questions from '../../questions.json'
 
 const graphqlAPI = process.env.HYGRAPH_ENDPOINT
 const graphcmsToken = process.env.HYGRAPH_TOKEN
@@ -26,6 +27,11 @@ export default async function handler(req, res) {
   //     goodComment = false
   //   }
   // }
+  for(let i = 0; i < comment.length; i++){
+    if(questions.includes(comment[i])){
+      goodComment = false
+    }
+  }
 
   const query = goodComment ? gql`
     mutation createPost($body: String!, $date: String!, $location: String!, $userName: String!, $userInfo: String!) {
