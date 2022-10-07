@@ -4,32 +4,44 @@ import Header from "../components/header"
 import Meta from "../components/meta"
 import { gql, GraphQLClient } from 'graphql-request';
 import { useRouter } from 'next/router'
+import useSWR from 'swr'
 
-export const getStaticProps = async (context) => {    
+// export const getStaticProps = async (context) => {    
 
-    const query = gql`
-    query MyQuery {
-    posts (orderBy: updatedAt_DESC) {
-      id
-      body
-      date
-      userName
+//     const query = gql`
+//     query MyQuery {
+//     posts (orderBy: updatedAt_DESC) {
+//       id
+//       body
+//       date
+//       userName
+//     }
+//   }
+// `
+//     const graphQLClient = new GraphQLClient(process.env.HYGRAPH_ENDPOINT)
+//     const data = await graphQLClient.request(query)
+
+//     return {
+//         props: {
+//             posts: data.posts
+//         },
+//         revalidate: 1,
+//     }
+// }
+
+export async function getStaticProps() {
+    const { getPosts } = require("../lib/helpers")
+    return {
+      props: (await getPosts()), revalidate: 1
     }
   }
-`
-    const graphQLClient = new GraphQLClient(process.env.HYGRAPH_ENDPOINT)
-    const data = await graphQLClient.request(query)
 
-    return {
-        props: {
-            posts: data.posts
-        },
-        revalidate: 1,
-    }
-}
+export default function Feed (props) {
+    // const { data: session } = useSession()
 
-export default function Feed ({ posts }) {
-    const { data: session } = useSession()
+    const fetcher = (...args) => fetch(...args).then(res => res.json())
+    const { data }= useSWR('/api', fetcher, {fallbackData: props, refreshInterval: 30000})
+    let posts = data.posts
     const router = useRouter()
     
     const refreshData = () => { 
