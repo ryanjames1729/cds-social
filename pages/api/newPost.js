@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       publishManyPosts(where: {body: $body, userName: $userName}) { count }
     }
   ` : gql`
-  mutation CreatePost($body: String!, $date: String!, $location: String!, $userName: String!, userInfo: String!) {
+  mutation CreatePost($body: String!, $date: String!, $location: String!, $userName: String!, $userInfo: String!) {
     createPost(data: { body: $body, date: $date, location: $location, userName: $userName, userInfo: $userInfo }) { id }
   }
 `
