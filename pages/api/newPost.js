@@ -5,7 +5,7 @@
 
 import { GraphQLClient, gql } from "graphql-request"
 // import { ProfanityEngine } from '@coffeeandfun/google-profanity-words'
-import questions from '../../questions.json'
+import bannedWords from '../../bannedWords.json'
 
 const graphqlAPI = process.env.HYGRAPH_ENDPOINT
 const graphcmsToken = process.env.HYGRAPH_TOKEN
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
   //   }
   // }
   for(let i = 0; i < comment.length; i++){
-    if(questions.includes(comment[i])){
+    if(bannedWords.includes(comment[i])){
       goodComment = false
     }
   }
