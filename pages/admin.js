@@ -50,7 +50,7 @@ export default function Admin (props) {
     let posts = data.posts
     const router = useRouter()
 
-    const loggedInUser = session?.user?.email.split("@")[0] || null
+    // const loggedInUser = session?.user?.email.split("@")[0] || null
 
     
     
