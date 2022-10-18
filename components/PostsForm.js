@@ -16,7 +16,9 @@ const PostsForm = ({ session }) => {
     const router = useRouter()
     
 
-    const handleSubmit = () => {
+    const handleSubmit = event => {
+        event.currentTarget.disabled = true;
+
         setError(false);
 
         const { value: commentBody } = commentEl.current;
@@ -50,6 +52,7 @@ const PostsForm = ({ session }) => {
                 setTimeout(() => {
                     setShowSuccessMessage(false);
                 }, 3000);
+                event.currentTarget.disabled = false;
         })
     }
 
