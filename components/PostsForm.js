@@ -79,7 +79,7 @@ const PostsForm = ({ session }) => {
             </div>
             {error && <p className="text-xs test-red-500">All fields are required.</p>}
             <div className="mt-8 rounded-lg w-1/3 hover:cursor-pointer">
-                <button type="button" onClick={handleSubmit} className="w-36 p-2 rounded-lg bg-cyan-700 hover:bg-cyan-800 hover:underline">Post My Comment</button>
+                <button type="button" onClick={handleSubmit} className="w-36 p-2 rounded-lg bg-cyan-700 hover:bg-cyan-800 hover:underline disabled:opacity-50">Post My Comment</button>
                 {showSuccessMessage && <span className="bg-orange-500 rounded-md background"><br/>Comment submitted for review.</span>}
             </div>
         </div>
